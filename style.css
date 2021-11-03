@@ -87,3 +87,11 @@ input[valid="valid"] {
 input[valid="invalid"] {
     border: 2px solid red;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}

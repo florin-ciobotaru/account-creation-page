@@ -4,6 +4,8 @@ const countries = ["Afghanistan", "Albania", "Algeria","Costa Rica", "Croatia", 
 const monthsDropdown = document.querySelector('#month');
 const countriesDropdown = document.querySelector('#country');
 
+const passwordSpans = document.querySelector(".password-spans");
+
 const specialChars = "~!@#$%^&*()_+`-=[]\;',./{}|:\"<>?";
 const checkSign = "✓";
 const notSign = "✗";
@@ -50,6 +52,10 @@ yearInput.addEventListener('input', function() {
 
 const passwordInput = document.querySelector("#password");
 passwordInput.addEventListener('input', function() {
+
+    passwordSpans.classList.remove('hide');
+    passwordSpans.classList.add('show');
+
     let passLength = verifyPasswordLength(passwordInput.value);
     let passLetters = verifyLowerAndUpperCaseLetters(passwordInput.value);
     let passNumbers = verifyNumberOrSymbol(passwordInput.value);
@@ -83,6 +89,10 @@ function updateStyleAndValidate(isValid, context) {
 function removeAttribute(context) {
     if(context.value.length === 0) {
         context.removeAttribute("valid");
+        if(context == passwordInput) {
+            passwordSpans.classList.remove('show');
+            passwordSpans.classList.add('hide');
+        }
     }
 }
 
