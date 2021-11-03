@@ -196,7 +196,7 @@ function verifyNumberOrSymbol(password) {
     let numberPresent = false;
     let symbolPresent = false;
     for(let i in password) {
-        if(password[i].charCodeAt(0) >= "0".charCodeAt(0) && password[i].charCodeAt(0) <= "(9)".charCodeAt(0) ) {
+        if(password[i].charCodeAt(0) >= "0".charCodeAt(0) && password[i].charCodeAt(0) <= "9".charCodeAt(0) ) {
             numberPresent = true;
         }
         if(specialChars.indexOf(password[i]) > -1) {
