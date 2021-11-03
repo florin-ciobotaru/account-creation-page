@@ -79,3 +79,11 @@ input {
 .green {
     color: green;
 }
+
+input[valid="valid"] {
+    border: 2px solid green;
+}
+
+input[valid="invalid"] {
+    border: 2px solid red;
+}

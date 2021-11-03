@@ -15,32 +15,37 @@ populateDropdown(countriesDropdown, countries);
 // email field
 const emailInput = document.querySelector("#email");
 emailInput.addEventListener('input', function() {
-    updateStyleAndValidate(verifyEmailAddress(this.value), this);
+    updateStyleAndValidate(verifyEmailAddress(this.value), this);  
+    removeAttribute(this);
 });
 
 // first name field
 const firstNameInput = document.querySelector("#firstName");
 firstNameInput.addEventListener('input', function() {
-    updateStyleAndValidate(verifyName(this.value), this)
+    updateStyleAndValidate(verifyName(this.value), this);    
+    removeAttribute(this);
 });
 
 
 // last name field
 const lastNameInput = document.querySelector("#lastName");
 lastNameInput.addEventListener('input', function() {
-    updateStyleAndValidate(verifyName(this.value), this)
+    updateStyleAndValidate(verifyName(this.value), this);    
+    removeAttribute(this);
 });
 
 // day field
 const dayInput = document.querySelector("#day");
 dayInput.addEventListener('input', function() {
-    updateStyleAndValidate(verifyDate(this.value), this)
+    updateStyleAndValidate(verifyDate(this.value), this);    
+    removeAttribute(this);
 });
 
 // year field
 const yearInput = document.querySelector("#year");
 yearInput.addEventListener('input', function() {
-    updateStyleAndValidate(verifyYear(this.value), this)
+    updateStyleAndValidate(verifyYear(this.value), this);
+    removeAttribute(this);
 });
 
 const passwordInput = document.querySelector("#password");
@@ -51,12 +56,11 @@ passwordInput.addEventListener('input', function() {
     let passNameOrEmail = verifyIfNameOrEmailIsContained(passwordInput.value);
     let passwordIsValid = passLength && passLetters && passNumbers && passNameOrEmail;
     if(passwordIsValid) {
-        passwordInput.classList.add("valid");
-        passwordInput.classList.remove("not-valid");
+        passwordInput.setAttribute("valid", "valid");
     } else {
-        passwordInput.classList.add("not-valid");
-        passwordInput.classList.remove("valid");
-    }
+        passwordInput.setAttribute("valid", "invalid");
+    };    
+    removeAttribute(passwordInput);
 });
 
 
@@ -69,12 +73,17 @@ const yourDataSpan = document.querySelector(".your-data-chars");
 // updating the border around the fields
 function updateStyleAndValidate(isValid, context) {
         if(isValid) {
-            context.classList.add("valid");
-            context.classList.remove("not-valid");
+            context.setAttribute("valid", "valid");
         } else {
-            context.classList.add("not-valid");
-            context.classList.remove("valid");
+            context.setAttribute("valid", "invalid");
         }
+}
+
+// removing attribute when 0 length detected
+function removeAttribute(context) {
+    if(context.value.length === 0) {
+        context.removeAttribute("valid");
+    }
 }
 
 // function to populate dropdowns
@@ -114,7 +123,7 @@ function verifyEmailAddress(emailAddress) {
 }
 
 function verifyName(name) {
-    if(name.length >= 1) {
+    if(name.length > 1) {
         return true;
     }
     return false;
